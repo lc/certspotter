@@ -14,11 +14,8 @@ import (
 	"crypto/sha256"
 	"crypto/x509"
 	"encoding/base64"
-	"flag"
 	"time"
 )
-
-var http_flag = flag.Bool("http", false, "Connect to CT logs over http instead of https, useful for testing")
 
 type LogInfoFile struct {
 	Logs []LogInfo `json:"logs"`
@@ -33,9 +30,6 @@ type LogInfo struct {
 }
 
 func (info *LogInfo) FullURI() string {
-	if *http_flag {
-		return "http://" + info.Url
-	}
 	return "https://" + info.Url
 }
 
